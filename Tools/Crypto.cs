@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace JevoCrypt
+namespace JevoCrypt.Tools
 {
     public static class Crypto
     {
