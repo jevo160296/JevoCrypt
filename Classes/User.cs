@@ -1,21 +1,48 @@
 ﻿using JevoCrypt.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace JevoCrypt.Classes
 {
-    public class User
+    public class User: INotifyPropertyChanged
     {
         #region Atributos
+        private int id;
         private string username;
         private string validationstring;
         #endregion
         #region Propiedades
-        public string UserName { get => username; set => username = value; }
-        public string ValidationString { get => validationstring; set => validationstring = value; }
+        public int Id { get => id; set => id = value; }
+        public string UserName 
+        { 
+            get => username;
+            set 
+            {
+                if (username!=value)
+                {
+                    username = value;
+                    OnPropertyChanged();
+                }
+            } 
+        }
+        public string ValidationString
+        {
+            get => validationstring;
+            set
+            {
+                validationstring = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
         #region Constructores
+        public User() : this("", "")
+        {
+
+        }
         public User(string username, string password)
         {
             this.username = username;
@@ -32,7 +59,7 @@ namespace JevoCrypt.Classes
             bool changed = false;
             if (IsCorrectPassword(oldPassword))
             {
-                validationstring = GenValidationString(username, newPassword);
+                ValidationString = GenValidationString(username, newPassword);
                 changed = true;
             }
             return changed;
@@ -68,6 +95,13 @@ namespace JevoCrypt.Classes
         public static bool operator !=(User u1, User u2)
         {
             return !(u1 == u2);
+        }
+        #endregion
+        #region Notifications
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
         #endregion
     }

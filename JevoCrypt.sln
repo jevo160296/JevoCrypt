@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JevoCrypt", "JevoCrypt.csproj", "{0F20C691-A325-448E-A783-CCA38A411A78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JevoCrypt", "JevoCrypt.csproj", "{0F20C691-A325-448E-A783-CCA38A411A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JevoCryptConsole", "..\JevoCryptConsole\JevoCryptConsole.csproj", "{7446B3B3-E710-48B9-89BC-472A2D9AE82C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JevoCryptConsole", "..\JevoCryptConsole\JevoCryptConsole.csproj", "{7446B3B3-E710-48B9-89BC-472A2D9AE82C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityCoreBasics", "..\EntityCoreBasics\EntityCoreBasics.csproj", "{0930F364-4445-4276-A6DD-0CCB0B3FB4DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JevoGastosCore", "..\jevo160296\JevoGastosCore\JevoGastosCore.csproj", "{F555FB1A-6DB8-4CA1-9DA7-23422C4ADB9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{7446B3B3-E710-48B9-89BC-472A2D9AE82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7446B3B3-E710-48B9-89BC-472A2D9AE82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7446B3B3-E710-48B9-89BC-472A2D9AE82C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0930F364-4445-4276-A6DD-0CCB0B3FB4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0930F364-4445-4276-A6DD-0CCB0B3FB4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0930F364-4445-4276-A6DD-0CCB0B3FB4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0930F364-4445-4276-A6DD-0CCB0B3FB4DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F555FB1A-6DB8-4CA1-9DA7-23422C4ADB9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F555FB1A-6DB8-4CA1-9DA7-23422C4ADB9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F555FB1A-6DB8-4CA1-9DA7-23422C4ADB9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F555FB1A-6DB8-4CA1-9DA7-23422C4ADB9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
