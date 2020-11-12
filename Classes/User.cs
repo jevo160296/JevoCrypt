@@ -13,6 +13,7 @@ namespace JevoCrypt.Classes
         private int id;
         private string username;
         private string validationstring;
+        private bool keepsignin;
         #endregion
         #region Propiedades
         public int Id { get => id; set => id = value; }
@@ -33,8 +34,23 @@ namespace JevoCrypt.Classes
             get => validationstring;
             set
             {
-                validationstring = value;
-                OnPropertyChanged();
+                if (value != validationstring)
+                {
+                    validationstring = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool KeepSignIn
+        {
+            get => keepsignin;
+            set
+            {
+                if (value!=keepsignin)
+                {
+                    keepsignin = value;
+                    OnPropertyChanged();
+                }
             }
         }
         #endregion
@@ -63,6 +79,16 @@ namespace JevoCrypt.Classes
                 changed = true;
             }
             return changed;
+        }
+        public bool SignIn(string name, string password,bool keepsignin=false)
+        {
+            bool signedIn = this.KeepSignIn || IsCorrectPassword(password);
+            this.KeepSignIn = signedIn && keepsignin;
+            return signedIn;
+        }
+        public void SignOut()
+        {
+            this.KeepSignIn = false;
         }
         #endregion
         #region Static methods

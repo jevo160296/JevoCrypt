@@ -47,16 +47,33 @@ namespace JevoCrypt.ModelView
             this.Container.SaveChanges();
             return response;
         }
-        public User SignIn(string name,string password)
+        public User UnlockedUser()
+        {
+            foreach (User user in Items)
+            {
+                if (user.KeepSignIn)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+        public User SignIn(string name,string password,bool keepsignin=false)
         {
             User returned,temp= UsersEdit.Get(Items, name);
-            returned = (temp?.IsCorrectPassword(password) ?? false) ? temp : null;
+            returned = (temp?.SignIn(name,password,keepsignin) ?? false) ? temp : null;
+            this.Container.SaveChanges();
             return returned;
+        }
+        public void SignOut()
+        {
+            UnlockedUser()?.SignOut();
+            this.Container.SaveChanges();
         }
 
         private ObservableCollection<User> Get()
         {
-            IQueryable<User> query = Context.Users.OrderByDescending(p => p.UserName);
+            IQueryable<User> query = Context.Users.OrderBy(p => p.UserName);
             Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.Load<User>(query);
             ObservableCollection<User> returnedData = Context.Users.Local.ToObservableCollection();
             return returnedData;
