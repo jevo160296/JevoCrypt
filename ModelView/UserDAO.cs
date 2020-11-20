@@ -10,6 +10,13 @@ namespace JevoCrypt.ModelView
 {
     public class UserDAO : JevoCryptDAO<User>
     {
+        #region Exceptions
+        public class UserExistsException : Exception
+        {
+            public UserExistsException() : base() { }
+            public UserExistsException(string message) : base(message) { }
+        }
+        #endregion
         public override ObservableCollection<User> Items
         {
             get
@@ -44,6 +51,26 @@ namespace JevoCrypt.ModelView
         public bool ChangePass(string name, string oldPassword,string newPassword)
         {
             bool response = UsersEdit.Get(Items, name)?.ChangePassword(oldPassword, newPassword) ?? false;
+            this.Container.SaveChanges();
+            return response;
+        }
+        public bool ChangeUserName(string name,string password,string newName)
+        {
+            User user = UsersEdit.Get(Items, name);
+            return ChangeUserName(user,password,newName);
+        }
+        public bool ChangeUserName(User user,string password,string newName)
+        {
+            bool response;
+            if (UsersEdit.UserExists(Items, newName))
+            {
+                response = false;
+                throw new UserExistsException("Este nombre de usuario ya existe.");
+            }
+            else
+            {
+                response = user?.ChangeUserName(password, newName) ?? false;
+            }
             this.Container.SaveChanges();
             return response;
         }

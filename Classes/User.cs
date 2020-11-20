@@ -20,7 +20,7 @@ namespace JevoCrypt.Classes
         public string UserName 
         { 
             get => username;
-            set 
+            private set 
             {
                 if (username!=value)
                 {
@@ -80,6 +80,17 @@ namespace JevoCrypt.Classes
             }
             return changed;
         }
+        public bool ChangeUserName(string password,string newUserName)
+        {
+            bool changed = false;
+            if (IsCorrectPassword(password))
+            {
+                ValidationString = GenValidationString(newUserName, password);
+                this.UserName = newUserName;
+                changed = true;
+            }
+            return changed;
+        }
         public bool SignIn(string name, string password,bool keepsignin=false)
         {
             bool signedIn = this.KeepSignIn || IsCorrectPassword(password);
@@ -97,6 +108,7 @@ namespace JevoCrypt.Classes
             return Crypto.Encrypt(username + password, password);
         }
         #endregion
+        #region Override
         #region == Overide
         public override int GetHashCode()
         {
@@ -121,6 +133,11 @@ namespace JevoCrypt.Classes
         public static bool operator !=(User u1, User u2)
         {
             return !(u1 == u2);
+        }
+        #endregion
+        public override string ToString()
+        {
+            return this.UserName;
         }
         #endregion
         #region Notifications
